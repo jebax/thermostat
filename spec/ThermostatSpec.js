@@ -12,12 +12,12 @@ describe('Thermostat', function() {
     })
 
     it('can be increased by 1', function() {
-      thermostat.increaseTemperature()
+      thermostat.up()
       expect(thermostat.temperature()).toEqual(21);
     })
 
     it('can be decreased by 1', function() {
-      thermostat.decreaseTemperature()
+      thermostat.down()
       expect(thermostat.temperature()).toEqual(19);
     })
 
@@ -27,14 +27,14 @@ describe('Thermostat', function() {
 
     it('cannot go below 10', function() {
       for (var i = 0; i < 11; i++) {
-        thermostat.decreaseTemperature()
+        thermostat.down()
       }
       expect(thermostat.temperature()).toEqual(10);
     })
 
     it('cannot go above 25 if power saving mode is on', function() {
       for (var i = 0; i < 6; i++) {
-        thermostat.increaseTemperature()
+        thermostat.up()
       }
       expect(thermostat.temperature()).toEqual(25);
     })
@@ -42,7 +42,7 @@ describe('Thermostat', function() {
     it('cannot go above 32 if power saving mode is off', function() {
       thermostat.togglePowerSavingMode()
       for (var i = 0; i < 13; i++) {
-        thermostat.increaseTemperature()
+        thermostat.up()
       }
       expect(thermostat.temperature()).toEqual(32);
     })
@@ -51,12 +51,21 @@ describe('Thermostat', function() {
       thermostat.resetTemperature()
       expect(thermostat.temperature()).toEqual(20);
     })
+
+    it('has a max temperature of 25 when power saving', function() {
+      expect(thermostat.MAX_TEMPERATURE_PSM_ON).toEqual(25);
+    })
+
+    it('has a max temperature of 32 when not power saving', function() {
+      expect(thermostat.MAX_TEMPERATURE_PSM_OFF).toEqual(32);
+    })
   })
 
   describe('Power saving mode', function() {
     it('should be on by default', function() {
       expect(thermostat.isPowerSavingMode()).toBe(true);
     })
+
     it('can be toggled', function() {
       thermostat.togglePowerSavingMode()
       expect(thermostat.isPowerSavingMode()).toBe(false);
@@ -64,9 +73,17 @@ describe('Thermostat', function() {
   })
 
   describe('Energy usage', function() {
+    it('has a low usage temperature limit', function() {
+      expect(thermostat.LOW_ENERGY_USAGE_LIMIT).toEqual(18)
+    })
+
+    it('has a medium usage temperature limit', function() {
+      expect(thermostat.MEDIUM_ENERGY_USAGE_LIMIT).toEqual(25)
+    })
+
     it('is low when temperature is below 18 degrees', function() {
       for (var i = 0; i < 3; i++) {
-        thermostat.decreaseTemperature()
+        thermostat.down()
       }
       expect(thermostat.currentEnergyUsage()).toEqual("low-usage")
     })
@@ -77,7 +94,7 @@ describe('Thermostat', function() {
 
     it('is high when temperature is above 24 degrees', function() {
       for (var i = 0; i < 5; i++) {
-        thermostat.increaseTemperature()
+        thermostat.up()
       }
       expect(thermostat.currentEnergyUsage()).toEqual("high-usage")
     })

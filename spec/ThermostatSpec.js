@@ -31,10 +31,16 @@ describe('Thermostat', function() {
       }
       expect(thermostat.temperature()).toEqual(10);
     })
+
+    it('cannot go above 25 if power saving mode is on', function() {
+      for (var i = 0; i < 6; i++) {
+        thermostat.increaseTemperature()
+      }
+      expect(thermostat.temperature()).toEqual(25);
+    })
   })
 
   describe('Power saving mode', function() {
-
     it('should be on by default', function() {
       expect(thermostat.powerSavingMode).toBe(true);
     })

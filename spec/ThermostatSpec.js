@@ -70,5 +70,9 @@ describe('Thermostat', function() {
       }
       expect(thermostat.currentEnergyUsage()).toEqual("low-usage")
     })
+
+    it('is medium when temperature is above 17 and below 25 degrees', function() {
+      expect(thermostat.currentEnergyUsage()).toEqual("medium-usage")
+    })
   })
 })

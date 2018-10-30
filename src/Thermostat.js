@@ -43,3 +43,9 @@ Thermostat.prototype.togglePowerSavingMode = function() {
 Thermostat.prototype.resetTemperature = function() {
   this._temperature = 20;
 }
+
+Thermostat.prototype.currentEnergyUsage = function() {
+  if (this._temperature < 18) {
+    return "low-usage"
+  }
+}

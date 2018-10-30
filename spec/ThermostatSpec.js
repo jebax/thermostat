@@ -63,5 +63,12 @@ describe('Thermostat', function() {
     })
   })
 
-
+  describe('Energy usage', function() {
+    it('is low when temperature is below 18 degrees', function() {
+      for (var i = 0; i < 3; i++) {
+        thermostat.decreaseTemperature()
+      }
+      expect(thermostat.currentEnergyUsage()).toEqual("low-usage")
+    })
+  })
 })

@@ -12,14 +12,26 @@ Thermostat.prototype.temperature = function() {
 
 Thermostat.prototype.increaseTemperature = function() {
   if (this.powerSavingMode) {
-    if (this._temperature < 25) {
+    if (this.temperature() < 25) {
+      this._temperature ++;
+    }
+  } else {
+    if (this.temperature() < 32) {
       this._temperature ++;
     }
   }
 }
 
 Thermostat.prototype.decreaseTemperature = function() {
-  if (this._temperature > this.MIN_TEMPERATURE) {
+  if (this.temperature() > this.MIN_TEMPERATURE) {
     this._temperature --;
+  }
+}
+
+Thermostat.prototype.togglePowerSavingMode = function() {
+  if (this.powerSavingMode) {
+    this.powerSavingMode = false;
+  } else {
+    this.powerSavingMode = true;
   }
 }

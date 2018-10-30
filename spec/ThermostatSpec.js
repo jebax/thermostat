@@ -32,4 +32,11 @@ describe('Thermostat', function() {
       expect(thermostat.temperature()).toEqual(10);
     })
   })
+
+  describe('Power saving mode', function() {
+
+    it('should be on by default', function() {
+      expect(thermostat.powerSavingMode).toBe(true);
+    })
+  })
 })

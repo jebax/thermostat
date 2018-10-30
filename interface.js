@@ -1,21 +1,21 @@
 $(document).ready(function() {
   var thermostat = new Thermostat();
-  $('#temperature').text(thermostat.temperature());
+  updateCurrentTemperature()
   $(':checkbox').click();
 
   $('#up').click(function() {
     thermostat.up();
-    $('#temperature').text(thermostat.temperature());
+    updateCurrentTemperature()
   })
 
   $('#down').click(function() {
     thermostat.down();
-    $('#temperature').text(thermostat.temperature());
+    updateCurrentTemperature()
   })
 
   $('#reset').click(function() {
     thermostat.resetTemperature();
-    $('#temperature').text(thermostat.temperature());
+    updateCurrentTemperature()
   })
 
   $(':checkbox').click(function() {
@@ -35,4 +35,9 @@ $(document).ready(function() {
       return thermostat.currentEnergyUsage();
     });
   });
+
+  function updateCurrentTemperature() {
+    $('#temperature').text(thermostat.temperature());
+    $('#temperature').attr('class', thermostat.currentEnergyUsage());
+  }
 });

@@ -74,5 +74,12 @@ describe('Thermostat', function() {
     it('is medium when temperature is above 17 and below 25 degrees', function() {
       expect(thermostat.currentEnergyUsage()).toEqual("medium-usage")
     })
+
+    it('is high when temperature is above 24 degrees', function() {
+      for (var i = 0; i < 5; i++) {
+        thermostat.increaseTemperature()
+      }
+      expect(thermostat.currentEnergyUsage()).toEqual("high-usage")
+    })
   })
 })

@@ -21,6 +21,13 @@ $(document).ready(function() {
   $(':checkbox').click(function() {
     thermostat.togglePowerSavingMode();
     console.log(thermostat.isPowerSavingMode());
-    $('#temperature').text(thermostat.temperature());
+
+    $('#on-or-off').text(function() {
+      if (thermostat.isPowerSavingMode()) {
+        return 'on'
+      } else {
+        return 'off'
+      }
+    })
   })
 })

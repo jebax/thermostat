@@ -23,9 +23,9 @@ $(document).ready(function() {
 
     $('#on-or-off').text(function() {
       if (thermostat.isPowerSavingMode()) {
-        return 'on'
+        return 'ON'
       } else {
-        return 'off'
+        return 'OFF'
       }
     })
   })
@@ -40,9 +40,9 @@ $(document).ready(function() {
     console.log(data)
     $('#outside-temperature').text(data.main.temp);
   })
-  
+
   function updateCurrentTemperature() {
-    $('#temperature').text(thermostat.temperature());
+    $('#temperature').text(thermostat.getCurrentTemperature());
     $('#temperature').attr('class', thermostat.currentEnergyUsage());
   }
 });

@@ -20,7 +20,6 @@ $(document).ready(function() {
 
   $(':checkbox').click(function() {
     thermostat.togglePowerSavingMode();
-    console.log(thermostat.isPowerSavingMode());
 
     $('#on-or-off').text(function() {
       if (thermostat.isPowerSavingMode()) {
@@ -30,4 +29,10 @@ $(document).ready(function() {
       }
     })
   })
-})
+
+  $('#energy-usage').click(function() {
+    $('#current-usage').text(function() {
+      return thermostat.currentEnergyUsage();
+    });
+  });
+});

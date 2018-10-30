@@ -3,15 +3,19 @@
 function Thermostat() {
   this._temperature = 20;
   this.MIN_TEMPERATURE = 10
-  this.powerSavingMode = true;
+  this._powerSavingMode = true;
 }
 
 Thermostat.prototype.temperature = function() {
   return this._temperature;
 }
 
+Thermostat.prototype.isPowerSavingMode = function() {
+  return this._powerSavingMode === true
+}
+
 Thermostat.prototype.increaseTemperature = function() {
-  if (this.powerSavingMode) {
+  if (this.isPowerSavingMode()) {
     if (this.temperature() < 25) {
       this._temperature ++;
     }
@@ -29,10 +33,10 @@ Thermostat.prototype.decreaseTemperature = function() {
 }
 
 Thermostat.prototype.togglePowerSavingMode = function() {
-  if (this.powerSavingMode) {
-    this.powerSavingMode = false;
+  if (this.isPowerSavingMode()) {
+    this._powerSavingMode = false;
   } else {
-    this.powerSavingMode = true;
+    this._powerSavingMode = true;
   }
 }
 

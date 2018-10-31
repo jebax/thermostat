@@ -1,7 +1,7 @@
 $(document).ready(function() {
   var thermostat = new Thermostat();
-  updateCurrentTemperature();
   displayWeather();
+  getSavedTemperature();
 
   $(':checkbox').click();
 
@@ -56,5 +56,13 @@ $(document).ready(function() {
       $('#outside-temperature').text(Math.round(data.main.temp));
     })
     $('#current-city').text(city);
+  }
+
+  function getSavedTemperature() {
+    var url = 'http://localhost:9292/temperature'
+    $.get(url, function(data) {
+      $('#temperature').text(data)
+      $('#temperature').attr('class', thermostat.currentEnergyUsage());
+    })
   }
 });

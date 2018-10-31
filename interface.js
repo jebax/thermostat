@@ -53,7 +53,7 @@ $(document).ready(function() {
     var apiToken = '&appid=020d9ffefd597aafa2a153548f62b9f1'
     var units = '&units=metric'
     $.get(url + apiToken + units, function(data) {
-      $('#outside-temperature').text(Math.floor(data.main.temp));
+      $('#outside-temperature').text(Math.round(data.main.temp));
     })
     $('#current-city').text(city);
   }

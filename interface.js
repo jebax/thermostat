@@ -46,6 +46,7 @@ $(document).ready(function() {
   function updateCurrentTemperature() {
     $('#temperature').text(thermostat.getCurrentTemperature());
     $('#temperature').attr('class', thermostat.currentEnergyUsage());
+    saveCurrentTemperature(thermostat.getCurrentTemperature());
   }
 
   function displayWeather(city = 'London') {
@@ -64,5 +65,10 @@ $(document).ready(function() {
       $('#temperature').text(data)
       $('#temperature').attr('class', thermostat.currentEnergyUsage());
     })
+  }
+
+  function saveCurrentTemperature(temperature) {
+    var url = 'http://localhost:9292/temperature?temperature=' + temperature
+    $.post(url)
   }
 });

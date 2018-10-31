@@ -1,6 +1,8 @@
 $(document).ready(function() {
   var thermostat = new Thermostat();
-  updateCurrentTemperature()
+  updateCurrentTemperature();
+  displayWeather();
+
   $(':checkbox').click();
 
   $('#up').click(function() {
@@ -36,12 +38,23 @@ $(document).ready(function() {
     });
   });
 
-  $.get('http://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=020d9ffefd597aafa2a153548f62b9f1&units=metric', function(data) {
-    $('#outside-temperature').text(Math.floor(data.main.temp));
+  $('#city-select').change(function() {
+    var chosenCity = $('#city-select').val();
+    displayWeather(chosenCity);
   })
 
   function updateCurrentTemperature() {
     $('#temperature').text(thermostat.getCurrentTemperature());
     $('#temperature').attr('class', thermostat.currentEnergyUsage());
+  }
+
+  function displayWeather(city = 'London') {
+    var url = 'http://api.openweathermap.org/data/2.5/weather?q=' + city + ',uk'
+    var apiToken = '&appid=020d9ffefd597aafa2a153548f62b9f1'
+    var units = '&units=metric'
+    $.get(url + apiToken + units, function(data) {
+      $('#outside-temperature').text(Math.floor(data.main.temp));
+    })
+    $('#current-city').text(city);
   }
 });

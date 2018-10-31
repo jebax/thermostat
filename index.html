@@ -9,20 +9,26 @@
         <h3 id='temperature'></h3>
         <button id='up'>Up</button>
         <button id='down'>Down</button>
+        <button id='reset'>Reset Temperature</button>
         <br>
         <br>
         <label class='switch'>Power Saving Mode
           <input type='checkbox'>
-          <span class='slider round'></span>
         </label>
         <p>Power Saving Mode is <span id='on-or-off'>ON</span></p>
-        <button id='reset'>Reset Temperature</button>
-        <br><br>
         <button id='energy-usage'>Check Energy Usage</button>
         <span id='current-usage'></span>
       </section>
       <section id='weather'>
-        <p>Temperature outside: <span id='outside-temperature'></span></p>
+        <p>Current temperature in <span id='current-city'>London</span>: <span id='outside-temperature'></span></p>
+        Select a city:
+        <select id='city-select'>
+          <option value='london'>London</option>
+          <option value='manchester'>Manchester</option>
+          <option value='edinburgh'>Edinburgh</option>
+          <option value='leeds'>Leeds</option>
+          <option value='cardiff'>Cardiff</option>
+        </select>
       </section>
       <script src='src/Thermostat.js'></script>
       <script src='src/jquery-3.3.1.js'></script>
